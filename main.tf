@@ -58,6 +58,7 @@ resource "azurerm_mariadb_server" "mariadb_server" {
     storage_mb            = var.storage_mb
     backup_retention_days = var.backup_retention_days
     geo_redundant_backup  = var.geo_redundant_backup
+    auto_grow             = var.auto_grow
   }
 }
 

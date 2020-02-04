@@ -1,5 +1,5 @@
-# terraform-azurerm-template
-[![](https://github.com/rhythmictech/terraform-azurerm-template/workflows/check/badge.svg)](https://github.com/rhythmictech/terraform-azurerm-template/actions)
+# terraform-azurerm-mariadb
+[![](https://github.com/rhythmictech/terraform-azurerm-mariadb/workflows/check/badge.svg)](https://github.com/rhythmictech/terraform-azurerm-mariadb/actions)
 
 Batteries-included MariaDB on Azure
 
@@ -17,6 +17,7 @@ Batteries-included MariaDB on Azure
 |------|-------------|------|---------|:-----:|
 | administrator\_login | The Administrator Login for the MariaDB Server. Changing this forces a new resource to be created. | `string` | `""` | no |
 | administrator\_password | The Password associated with the administrator\_login for the MariaDB Server. | `string` | `""` | no |
+| auto\_grow | Whether autogrow is enabled | `string` | `"Enabled"` | no |
 | backup\_retention\_days | Backup retention days for the server, supported values are between 7 and 35 days. | `number` | `7` | no |
 | db\_charset | Specifies the Charset for the MariaDB Database, which needs to be a valid MariaDB Charset. | `string` | `"utf8"` | no |
 | db\_collation | Specifies the Collation for the MariaDB Database, which needs to be a valid MariaDB Collation. | `string` | `"utf8_general_ci"` | no |

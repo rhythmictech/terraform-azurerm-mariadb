@@ -28,24 +28,6 @@ variable "sku_name" {
   type        = string
 }
 
-# variable "sku_capacity" {
-#   description = "The scale up/out capacity, representing server's compute units"
-#   default     = 2
-#   type        = number
-# }
-
-# variable "sku_tier" {
-#   description = "The tier of the particular SKU. Possible values are Basic, GeneralPurpose, and MemoryOptimized."
-#   default     = "Basic"
-#   type        = string
-# }
-
-# variable "sku_family" {
-#   description = " The family of hardware Gen4 or Gen5."
-#   default     = "Gen5"
-#   type        = string
-# }
-
 variable "storage_mb" {
   description = <<EOD
     Max storage allowed for a server. Possible values are:
@@ -65,6 +47,12 @@ variable "backup_retention_days" {
 variable "geo_redundant_backup" {
   description = "Enable Geo-redundant or not for server backup. Valid values for this property are Enabled or Disabled, not supported for the basic tier."
   default     = "Disabled"
+  type        = string
+}
+
+variable "auto_grow" {
+  description = "Whether autogrow is enabled"
+  default     = "Enabled"
   type        = string
 }
 
