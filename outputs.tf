@@ -1,3 +1,8 @@
+output "resource_group_name" {
+  description = "Name of MariaDB server resource group"
+  value       = azurerm_resource_group.mariadb_rg.name
+}
+
 output "server_name" {
   description = "Name of MariaDB server"
   value       = azurerm_mariadb_server.mariadb_server.name
