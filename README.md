@@ -38,6 +38,7 @@ Batteries-included MariaDB on Azure
 | administrator\_login | Administrative user name of MariaDB server |
 | administrator\_password | Password for administrative user name of MariaDB server |
 | db\_name | Name of MariaDB database |
+| resource\_group\_name | Name of MariaDB server resource group |
 | server\_fqdn | FQDN of MariaDB server |
 | server\_id | ID of MariaDB server |
 | server\_name | Name of MariaDB server |
