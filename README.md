@@ -36,10 +36,10 @@ Batteries-included MariaDB on Azure
 
 | Name | Description |
 |------|-------------|
-| administrator\_login | n/a |
-| administrator\_password | n/a |
-| db\_name | n/a |
-| server\_id | n/a |
-| server\_name | n/a |
+| administrator\_login | Administrative user name of MariaDB server |
+| administrator\_password | Password for administrative user name of MariaDB server |
+| db\_name | Name of MariaDB database |
+| server\_id | ID of MariaDB server |
+| server\_name | Name of MariaDB server |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
