@@ -1,15 +1,10 @@
-variable "resource_group_name" {
+variable "name" {
   description = "The name of the resource group in which to create the MariaDB Server."
   type        = string
 }
 
 variable "location" {
   description = "Specifies the supported Azure location where the resource exists."
-  type        = string
-}
-
-variable "server_name" {
-  description = "Specifies the name of the MariaDB Server."
   type        = string
 }
 
@@ -93,4 +88,10 @@ variable "db_collation" {
   description = "Specifies the Collation for the MariaDB Database, which needs to be a valid MariaDB Collation."
   default     = "utf8_general_ci"
   type        = string
+}
+
+variable "tags" {
+  description = "Tags to apply to all resources"
+  default     = {}
+  type        = map(string)
 }

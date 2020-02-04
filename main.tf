@@ -1,10 +1,23 @@
+
+module "tags" {
+  source  = "rhythmictech/tags/terraform"
+  version = "1.0.0"
+
+  enforce_case = "UPPER"
+  tags         = var.tags
+  names = [
+    var.name
+  ]
+}
+
 resource "azurerm_resource_group" "mariadb_rg" {
-  name     = var.resource_group_name
+  name     = "${var.name}-RG"
   location = var.location
+  tags     = module.tags.tags
 }
 
 resource "azurerm_mariadb_server" "mariadb_server" {
-  name                = var.server_name
+  name                = "${var.name}-MARIADB-SRVR"
   location            = azurerm_resource_group.mariadb_rg.location
   resource_group_name = azurerm_resource_group.mariadb_rg.name
 
@@ -25,6 +38,7 @@ resource "azurerm_mariadb_server" "mariadb_server" {
   administrator_login_password = var.administrator_password
   version                      = var.server_version
   ssl_enforcement              = var.ssl_enforcement
+  tags                         = module.tags.tags
 }
 
 resource "azurerm_mariadb_database" "mariadb_database" {
