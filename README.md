@@ -21,7 +21,7 @@ Batteries-included MariaDB on Azure
 | db\_charset | Specifies the Charset for the MariaDB Database, which needs to be a valid MariaDB Charset. | `string` | `"utf8"` | no |
 | db\_collation | Specifies the Collation for the MariaDB Database, which needs to be a valid MariaDB Collation. | `string` | `"utf8_general_ci"` | no |
 | db\_name | The list of names of the MariaDB Database, which needs to be a valid MariaDB. | `string` | `"defaultDB"` | no |
-| geo\_redundant\_backup | Enable Geo-redundant or not for server backup. Valid values for this property are Enabled or Disabled, not supported for the basic tier. | `string` | `"Disabled"` | no |
+| geo\_redundant\_backup | Whether autogrow is enabled | `string` | `"Enabled"` | no |
 | location | Specifies the supported Azure location where the resource exists. | `string` | `"eastus"` | no |
 | name | The name of the resource group in which to create the MariaDB Server. | `string` | `""` | no |
 | server\_version | Specifies the version of MariaDB to use. | `string` | `"10.3"` | no |
