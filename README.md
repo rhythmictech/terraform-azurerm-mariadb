@@ -1,8 +1,7 @@
 # terraform-azurerm-template
 [![](https://github.com/rhythmictech/terraform-azurerm-template/workflows/check/badge.svg)](https://github.com/rhythmictech/terraform-azurerm-template/actions)
 
-Template repo for Azure module
-
+Batteries-included MariaDB on Azure
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Providers
