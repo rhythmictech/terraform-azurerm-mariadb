@@ -23,7 +23,7 @@ Batteries-included MariaDB on Azure
 | geo\_redundant\_backup | Enable Geo-redundant or not for server backup. Valid values for this property are Enabled or Disabled, not supported for the basic tier. | `string` | `"Disabled"` | no |
 | location | Specifies the supported Azure location where the resource exists. | `string` | n/a | yes |
 | name | The name of the resource group in which to create the MariaDB Server. | `string` | n/a | yes |
-| server\_version | Specifies the version of MariaDB to use. | `string` | `"10.2"` | no |
+| server\_version | Specifies the version of MariaDB to use. | `string` | `"10.3"` | no |
 | sku\_capacity | The scale up/out capacity, representing server's compute units | `number` | `2` | no |
 | sku\_family | The family of hardware Gen4 or Gen5. | `string` | `"Gen5"` | no |
 | sku\_name | Specifies the SKU Name for this MariaDB Server. | `string` | `"B_Gen5_2"` | no |

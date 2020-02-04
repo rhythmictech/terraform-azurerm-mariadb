@@ -66,7 +66,7 @@ variable "geo_redundant_backup" {
 
 variable "server_version" {
   description = "Specifies the version of MariaDB to use."
-  default     = "10.2"
+  default     = "10.3"
   type        = string
 }
 
