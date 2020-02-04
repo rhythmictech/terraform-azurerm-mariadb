@@ -50,7 +50,7 @@ variable "geo_redundant_backup" {
   type        = string
 }
 
-variable "geo_redundant_backup" {
+variable "auto_grow" {
   description = "Whether autogrow is enabled"
   default     = "Enabled"
   type        = string
