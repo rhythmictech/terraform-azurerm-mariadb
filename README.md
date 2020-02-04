@@ -29,7 +29,7 @@ Batteries-included MariaDB on Azure
 | sku\_name | Specifies the SKU Name for this MariaDB Server. | `string` | `"B_Gen5_2"` | no |
 | sku\_tier | The tier of the particular SKU. Possible values are Basic, GeneralPurpose, and MemoryOptimized. | `string` | `"Basic"` | no |
 | ssl\_enforcement | Specifies if SSL should be enforced on connections. Possible values are Enabled and Disabled. | `string` | `"Enabled"` | no |
-| storage\_mb | Max storage allowed for a server. Possible values are between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU and between 5120 MB(5GB) and 4194304 MB(4TB) for General Purpose/Memory Optimized SKUs. | `number` | `5120` | no |
+| storage\_mb | Max storage allowed for a server. Possible values are:<br>      - between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU<br>      - between 5120 MB(5GB) and 4194304 MB(4TB) for General Purpose/Memory Optimized SKUs | `number` | `5120` | no |
 | tags | Tags to apply to all resources | `map(string)` | `{}` | no |
 
 ## Outputs
