@@ -1,5 +1,5 @@
-# terraform-azurerm-template
-[![](https://github.com/rhythmictech/terraform-azurerm-template/workflows/check/badge.svg)](https://github.com/rhythmictech/terraform-azurerm-template/actions)
+# terraform-azurerm-mariadb
+[![](https://github.com/rhythmictech/terraform-azurerm-mariadb/workflows/check/badge.svg)](https://github.com/rhythmictech/terraform-azurerm-mariadb/actions)
 
 Batteries-included MariaDB on Azure
 
