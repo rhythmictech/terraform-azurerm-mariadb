@@ -5,18 +5,23 @@ output "server_name" {
 
 output "administrator_login" {
   description = "Administrative user name of MariaDB server"
-  value       = var.administrator_login
+  value       = local.administrator_login
 }
 
 output "administrator_password" {
   description = "Password for administrative user name of MariaDB server"
-  value       = var.administrator_password
+  value       = local.administrator_password
   sensitive   = true
 }
 
 output "server_id" {
   description = "ID of MariaDB server"
   value       = azurerm_mariadb_server.mariadb_server.id
+}
+
+output "server_fqdn" {
+  description = "FQDN of MariaDB server"
+  value       = azurerm_mariadb_server.mariadb_server.fqdn
 }
 
 output "db_name" {

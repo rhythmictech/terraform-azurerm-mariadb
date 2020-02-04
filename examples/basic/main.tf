@@ -1,0 +1,4 @@
+
+module "mariadb" {
+  source = "../../"
+}

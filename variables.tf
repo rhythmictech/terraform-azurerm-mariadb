@@ -1,20 +1,24 @@
 variable "name" {
   description = "The name of the resource group in which to create the MariaDB Server."
+  default     = ""
   type        = string
 }
 
 variable "location" {
   description = "Specifies the supported Azure location where the resource exists."
+  default     = "eastus"
   type        = string
 }
 
 variable "administrator_login" {
   description = "The Administrator Login for the MariaDB Server. Changing this forces a new resource to be created."
+  default     = ""
   type        = string
 }
 
 variable "administrator_password" {
   description = "The Password associated with the administrator_login for the MariaDB Server."
+  default     = ""
   type        = string
 }
 
@@ -24,23 +28,23 @@ variable "sku_name" {
   type        = string
 }
 
-variable "sku_capacity" {
-  description = "The scale up/out capacity, representing server's compute units"
-  default     = 2
-  type        = number
-}
+# variable "sku_capacity" {
+#   description = "The scale up/out capacity, representing server's compute units"
+#   default     = 2
+#   type        = number
+# }
 
-variable "sku_tier" {
-  description = "The tier of the particular SKU. Possible values are Basic, GeneralPurpose, and MemoryOptimized."
-  default     = "Basic"
-  type        = string
-}
+# variable "sku_tier" {
+#   description = "The tier of the particular SKU. Possible values are Basic, GeneralPurpose, and MemoryOptimized."
+#   default     = "Basic"
+#   type        = string
+# }
 
-variable "sku_family" {
-  description = " The family of hardware Gen4 or Gen5."
-  default     = "Gen5"
-  type        = string
-}
+# variable "sku_family" {
+#   description = " The family of hardware Gen4 or Gen5."
+#   default     = "Gen5"
+#   type        = string
+# }
 
 variable "storage_mb" {
   description = <<EOD
