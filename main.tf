@@ -63,7 +63,7 @@ resource "azurerm_mariadb_server" "mariadb_server" {
 }
 
 resource "azurerm_mariadb_database" "mariadb_database" {
-  name                = var.db_name
+  name                = lower(var.db_name)
   resource_group_name = azurerm_resource_group.mariadb_rg.name
   server_name         = azurerm_mariadb_server.mariadb_server.name
   charset             = var.db_charset
