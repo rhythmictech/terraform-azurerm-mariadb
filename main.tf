@@ -2,8 +2,6 @@
 # Optional Resources
 ########################################
 resource "random_pet" "name" {
-  count = var.name == "" || var.administrator_login == "" ? 1 : 0
-
   length    = 3
   separator = "-"
 }
@@ -18,8 +16,8 @@ resource "random_password" "db_password" {
 
 locals {
   administrator_password   = var.administrator_password == "" ? random_password.db_password[0].result : var.administrator_password
-  name                     = var.name == "" ? random_pet.name[0].id : var.name
-  administrator_login_long = var.administrator_login == "" ? random_pet.name[0].id : var.administrator_login
+  name                     = var.name == "" ? random_pet.name.id : var.name
+  administrator_login_long = var.administrator_login == "" ? random_pet.name.id : var.administrator_login
   administrator_login      = substr(local.administrator_login_long, 0, 16)
 }
 
