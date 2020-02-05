@@ -21,7 +21,7 @@ Batteries-included MariaDB on Azure
 | backup\_retention\_days | Backup retention days for the server, supported values are between 7 and 35 days. | `number` | `7` | no |
 | db\_charset | Specifies the Charset for the MariaDB Database, which needs to be a valid MariaDB Charset. | `string` | `"utf8"` | no |
 | db\_collation | Specifies the Collation for the MariaDB Database, which needs to be a valid MariaDB Collation. | `string` | `"utf8_general_ci"` | no |
-| db\_name | The list of names of the MariaDB Database, which needs to be a valid MariaDB. | `string` | `"defaultDB"` | no |
+| db\_name | The list of names of the MariaDB Database, which needs to be a valid MariaDB. | `string` | `"defaultdb"` | no |
 | geo\_redundant\_backup | Enable Geo-redundant or not for server backup. Valid values for this property are Enabled or Disabled, not supported for the basic tier. | `string` | `"Disabled"` | no |
 | location | Specifies the supported Azure location where the resource exists. | `string` | `"eastus"` | no |
 | name | The name of the resource group in which to create the MariaDB Server. | `string` | `""` | no |
