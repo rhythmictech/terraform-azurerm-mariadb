@@ -35,16 +35,16 @@ module "tags" {
 ########################################
 # MariaDB things
 ########################################
-resource "azurerm_resource_group" "mariadb_rg" {
+resource "azurerm_resource_group" "mariadb" {
   name     = "${local.name}-RG"
   location = var.location
   tags     = module.tags.tags
 }
 
-resource "azurerm_mariadb_server" "mariadb_server" {
+resource "azurerm_mariadb_server" "server" {
   name                         = lower("${local.name}-MARIADB-SRVR")
-  location                     = azurerm_resource_group.mariadb_rg.location
-  resource_group_name          = azurerm_resource_group.mariadb_rg.name
+  location                     = azurerm_resource_group.mariadb.location
+  resource_group_name          = azurerm_resource_group.mariadb.name
   sku_name                     = var.sku_name
   administrator_login          = local.administrator_login
   administrator_login_password = local.administrator_password
@@ -60,10 +60,40 @@ resource "azurerm_mariadb_server" "mariadb_server" {
   }
 }
 
-resource "azurerm_mariadb_database" "mariadb_database" {
-  name                = lower(var.db_name)
-  resource_group_name = azurerm_resource_group.mariadb_rg.name
-  server_name         = azurerm_mariadb_server.mariadb_server.name
-  charset             = var.db_charset
-  collation           = var.db_collation
+resource "azurerm_mariadb_database" "database" {
+  for_each = var.dbs
+
+  name                = each.value.name
+  charset             = lookup(each.value, "charset", "utf8")
+  collation           = lookup(each.value, "collation", "utf8_unicode_ci")
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_mariadb_server.server.name
+}
+
+resource "azurerm_mariadb_firewall_rule" "firewall_rule" {
+  for_each = var.firewall_rules
+
+  name                = each.key
+  start_ip_address    = each.value.start_ip
+  end_ip_address      = each.value.end_ip
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_mariadb_server.server.name
+}
+
+resource "azurerm_mariadb_virtual_network_rule" "vnet_rule" {
+  for_each = var.vnet_rules
+
+  name                = each.key
+  subnet_id           = each.value
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_mariadb_server.server.name
+}
+
+resource "azurerm_mariadb_configuration" "config" {
+  for_each = var.mariadb_configurations
+
+  name                = each.key
+  value               = each.value
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_mariadb_server.server.name
 }
