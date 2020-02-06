@@ -35,16 +35,16 @@ module "tags" {
 ########################################
 # MariaDB things
 ########################################
-resource "azurerm_resource_group" "mariadb" {
+resource "azurerm_resource_group" "mariadb_rg" {
   name     = "${local.name}-RG"
   location = var.location
   tags     = module.tags.tags
 }
 
-resource "azurerm_mariadb_server" "server" {
+resource "azurerm_mariadb_server" "mariadb_server" {
   name                         = lower("${local.name}-MARIADB-SRVR")
-  location                     = azurerm_resource_group.mariadb.location
-  resource_group_name          = azurerm_resource_group.mariadb.name
+  location                     = azurerm_resource_group.mariadb_rg.location
+  resource_group_name          = azurerm_resource_group.mariadb_rg.name
   sku_name                     = var.sku_name
   administrator_login          = local.administrator_login
   administrator_login_password = local.administrator_password
@@ -66,8 +66,8 @@ resource "azurerm_mariadb_database" "database" {
   name                = each.value.name
   charset             = lookup(each.value, "charset", "utf8")
   collation           = lookup(each.value, "collation", "utf8_unicode_ci")
-  resource_group_name = var.resource_group_name
-  server_name         = azurerm_mariadb_server.server.name
+  resource_group_name = azurerm_resource_group.mariadb_rg.name
+  server_name         = azurerm_mariadb_server.mariadb_server.name
 }
 
 resource "azurerm_mariadb_firewall_rule" "firewall_rule" {
@@ -76,8 +76,8 @@ resource "azurerm_mariadb_firewall_rule" "firewall_rule" {
   name                = each.key
   start_ip_address    = each.value.start_ip
   end_ip_address      = each.value.end_ip
-  resource_group_name = var.resource_group_name
-  server_name         = azurerm_mariadb_server.server.name
+  resource_group_name = azurerm_resource_group.mariadb_rg.name
+  server_name         = azurerm_mariadb_server.mariadb_server.name
 }
 
 resource "azurerm_mariadb_virtual_network_rule" "vnet_rule" {
@@ -85,8 +85,8 @@ resource "azurerm_mariadb_virtual_network_rule" "vnet_rule" {
 
   name                = each.key
   subnet_id           = each.value
-  resource_group_name = var.resource_group_name
-  server_name         = azurerm_mariadb_server.server.name
+  resource_group_name = azurerm_resource_group.mariadb_rg.name
+  server_name         = azurerm_mariadb_server.mariadb_server.name
 }
 
 resource "azurerm_mariadb_configuration" "config" {
@@ -94,6 +94,6 @@ resource "azurerm_mariadb_configuration" "config" {
 
   name                = each.key
   value               = each.value
-  resource_group_name = var.resource_group_name
-  server_name         = azurerm_mariadb_server.server.name
+  resource_group_name = azurerm_resource_group.mariadb_rg.name
+  server_name         = azurerm_mariadb_server.mariadb_server.name
 }

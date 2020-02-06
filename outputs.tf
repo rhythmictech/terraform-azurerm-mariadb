@@ -28,8 +28,3 @@ output "server_fqdn" {
   description = "FQDN of MariaDB server"
   value       = azurerm_mariadb_server.mariadb_server.fqdn
 }
-
-output "db_name" {
-  description = "Name of MariaDB database"
-  value       = azurerm_mariadb_database.mariadb_database.name
-}
