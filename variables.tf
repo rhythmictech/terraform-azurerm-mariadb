@@ -68,22 +68,40 @@ variable "ssl_enforcement" {
   type        = string
 }
 
-variable "db_name" {
-  description = "The list of names of the MariaDB Database, which needs to be a valid MariaDB."
-  default     = "defaultdb"
-  type        = string
-}
-
-variable "db_charset" {
+variable "charset" {
   description = "Specifies the Charset for the MariaDB Database, which needs to be a valid MariaDB Charset."
   default     = "utf8"
   type        = string
 }
 
-variable "db_collation" {
+variable "collation" {
   description = "Specifies the Collation for the MariaDB Database, which needs to be a valid MariaDB Collation."
   default     = "utf8_general_ci"
   type        = string
+}
+
+variable "dbs" {
+  description = "Map of databases to create, values supported: name, charset, collation"
+  type        = map
+  default     = {}
+}
+
+variable "firewall_rules" {
+  description = "Map of firewall rules to create. Key is rule name, values are start_ip, end_ip"
+  type        = map
+  default     = {}
+}
+
+variable "vnet_rules" {
+  description = "Map of vnet rules to create. Key is name, value is vnet id"
+  type        = map
+  default     = {}
+}
+
+variable "mariadb_configurations" {
+  description = "Map of MariaDB configuration settings to create. Key is name, value is vnet id"
+  type        = map
+  default     = {}
 }
 
 variable "tags" {
