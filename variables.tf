@@ -99,7 +99,7 @@ variable "vnet_rules" {
 }
 
 variable "mariadb_configurations" {
-  description = "Map of MariaDB configuration settings to create. Key is name, value is vnet id"
+  description = "Map of MariaDB configuration settings to create. Key is name, value is value. See mariadb.com/kb/en/server-system-variables/"
   type        = map
   default     = {}
 }
