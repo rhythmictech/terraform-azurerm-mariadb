@@ -48,6 +48,7 @@ Batteries-included MariaDB on Azure
 |------|-------------|
 | administrator\_login | Administrative user name of MariaDB server |
 | administrator\_password | Password for administrative user name of MariaDB server |
+| monitor\_metric\_alerts | List Azure Monitor Metric Alert resources for the MariaDB Server |
 | resource\_group\_name | Name of MariaDB server resource group |
 | server\_fqdn | FQDN of MariaDB server |
 | server\_id | ID of MariaDB server |

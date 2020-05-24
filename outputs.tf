@@ -28,3 +28,8 @@ output "server_fqdn" {
   description = "FQDN of MariaDB server"
   value       = azurerm_mariadb_server.mariadb_server.fqdn
 }
+
+output "monitor_metric_alerts" {
+  description = "List Azure Monitor Metric Alert resources for the MariaDB Server"
+  value       = azurerm_monitor_metric_alert.mariadb
+}
