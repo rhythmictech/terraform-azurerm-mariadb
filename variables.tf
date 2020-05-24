@@ -113,13 +113,13 @@ variable "tags" {
 ########################################
 # Monitoring
 ########################################
-variable "storage_account_monitor_action_group_id" {
+variable "monitor_action_group_id" {
   default     = ""
   description = "ID of Azure Monitor Action Group for metric to trigger"
   type        = string
 }
 
-variable "storage_account_monitor_metric_alert_criteria" {
+variable "monitor_metric_alert_criteria" {
   default     = {}
   description = "Map of name = criteria objects"
 

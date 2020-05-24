@@ -102,14 +102,14 @@ resource "azurerm_mariadb_configuration" "config" {
 # Monitoring
 ########################################
 resource "azurerm_monitor_metric_alert" "mariadb" {
-  for_each            = var.storage_account_monitor_metric_alert_criteria
+  for_each            = var.monitor_metric_alert_criteria
   name                = "${var.name}-${upper(each.key)}"
   resource_group_name = azurerm_resource_group.mariadb_rg.name
   scopes              = [azurerm_mariadb_server.mariadb_server.id]
   tags                = module.tags.tags
 
   action {
-    action_group_id = var.storage_account_monitor_action_group_id
+    action_group_id = var.monitor_action_group_id
   }
 
   # see https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported

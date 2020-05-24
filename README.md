@@ -32,12 +32,12 @@ Batteries-included MariaDB on Azure
 | geo\_redundant\_backup | Enable Geo-redundant or not for server backup. Valid values for this property are Enabled or Disabled, not supported for the basic tier. | `string` | `"Disabled"` | no |
 | location | Specifies the supported Azure location where the resource exists. | `string` | `"eastus"` | no |
 | mariadb\_configurations | Map of MariaDB configuration settings to create. Key is name, value is value. See mariadb.com/kb/en/server-system-variables/ | `map` | `{}` | no |
+| monitor\_action\_group\_id | ID of Azure Monitor Action Group for metric to trigger | `string` | `""` | no |
+| monitor\_metric\_alert\_criteria | Map of name = criteria objects | <pre>map(object({<br>    # criteria.*.aggregation to be one of [Average Count Minimum Maximum Total]<br>    aggregation = string<br>    metric_name = string<br>    # criteria.0.operator to be one of [Equals NotEquals GreaterThan GreaterThanOrEqual LessThan LessThanOrEqual]<br>    operator  = string<br>    threshold = number<br><br>    dimension = object({<br>      name     = string<br>      operator = string<br>      values   = list(string)<br>    })<br>  }))</pre> | `{}` | no |
 | name | The name of the resource group in which to create the MariaDB Server. | `string` | `""` | no |
 | server\_version | Specifies the version of MariaDB to use. | `string` | `"10.3"` | no |
 | sku\_name | Specifies the SKU Name for this MariaDB Server. | `string` | `"B_Gen5_2"` | no |
 | ssl\_enforcement | Specifies if SSL should be enforced on connections. Possible values are Enabled and Disabled. | `string` | `"Enabled"` | no |
-| storage\_account\_monitor\_action\_group\_id | ID of Azure Monitor Action Group for metric to trigger | `string` | `""` | no |
-| storage\_account\_monitor\_metric\_alert\_criteria | Map of name = criteria objects | <pre>map(object({<br>    # criteria.*.aggregation to be one of [Average Count Minimum Maximum Total]<br>    aggregation = string<br>    metric_name = string<br>    # criteria.0.operator to be one of [Equals NotEquals GreaterThan GreaterThanOrEqual LessThan LessThanOrEqual]<br>    operator  = string<br>    threshold = number<br><br>    dimension = object({<br>      name     = string<br>      operator = string<br>      values   = list(string)<br>    })<br>  }))</pre> | `{}` | no |
 | storage\_mb | Max storage allowed for a server. Possible values are:<br>      - between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU<br>      - between 5120 MB(5GB) and 4194304 MB(4TB) for General Purpose/Memory Optimized SKUs | `number` | `5120` | no |
 | tags | Tags to apply to all resources | `map(string)` | `{}` | no |
 | vnet\_rules | Map of vnet rules to create. Key is name, value is vnet id | `map` | `{}` | no |
