@@ -120,10 +120,13 @@ resource "azurerm_monitor_metric_alert" "mariadb" {
     operator         = each.value.operator
     threshold        = each.value.threshold
 
-    dimension {
-      name     = each.value.dimension.name
-      operator = each.value.dimension.operator
-      values   = each.value.dimension.values
+    dynamic "dimension" {
+      for_each = each.value.dimension
+      content {
+        name     = each.value.name
+        operator = each.value.operator
+        values   = each.value.values
+      }
     }
   }
 }

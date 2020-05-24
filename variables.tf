@@ -131,10 +131,10 @@ variable "monitor_metric_alert_criteria" {
     operator  = string
     threshold = number
 
-    dimension = object({
+    dimension = map(object({
       name     = string
       operator = string
       values   = list(string)
-    })
+    }))
   }))
 }
