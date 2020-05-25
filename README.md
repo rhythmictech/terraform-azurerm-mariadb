@@ -3,6 +3,34 @@
 
 Batteries-included MariaDB on Azure
 
+## Example
+A basic database with unsafe firewall rules and a metric monitor:
+```hcl
+module "mariadb" {
+  source  = "rhythmictech/mariadb/azurerm"
+  version = "v2.1.0"
+
+  administrator_login     = var.administrator_login
+  firewall_rules          = {
+      unsafe = {
+          start_ip = "0.0.0.0"
+          end_ip   = h0.0.0.0"
+      }
+  }
+  location                = var.location
+  monitor_action_group_id = var.urgent_monitor_action_group_id
+  monitor_metric_alert_criteria = {
+    cpu_utilization = {
+      aggregation = "Maximum"
+      metric_name = "CPU"
+      operator    = "GreaterThan"
+      threshold   = 90
+      dimension   = {}
+    }
+  }
+}
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
