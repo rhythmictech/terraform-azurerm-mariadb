@@ -3,7 +3,41 @@
 
 Batteries-included MariaDB on Azure
 
+## Example
+A basic database with unsafe firewall rules and a metric monitor:
+```hcl
+module "mariadb" {
+  source  = "rhythmictech/mariadb/azurerm"
+  version = "v2.1.0"
+
+  administrator_login     = var.administrator_login
+  firewall_rules          = {
+      unsafe = {
+          start_ip = "0.0.0.0"
+          end_ip   = h0.0.0.0"
+      }
+  }
+  location                = var.location
+  monitor_action_group_id = var.urgent_monitor_action_group_id
+  monitor_metric_alert_criteria = {
+    cpu_utilization = {
+      aggregation = "Maximum"
+      metric_name = "CPU"
+      operator    = "GreaterThan"
+      threshold   = 90
+      dimension   = {}
+    }
+  }
+}
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12 |
+
 ## Providers
 
 | Name | Version |
@@ -14,7 +48,7 @@ Batteries-included MariaDB on Azure
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | administrator\_login | The Administrator Login for the MariaDB Server. Changing this forces a new resource to be created. | `string` | `""` | no |
 | administrator\_password | The Password associated with the administrator\_login for the MariaDB Server. | `string` | `""` | no |
 | auto\_grow | Whether autogrow is enabled | `string` | `"Enabled"` | no |
@@ -25,7 +59,9 @@ Batteries-included MariaDB on Azure
 | firewall\_rules | Map of firewall rules to create. Key is rule name, values are start\_ip, end\_ip | `map` | `{}` | no |
 | geo\_redundant\_backup | Enable Geo-redundant or not for server backup. Valid values for this property are Enabled or Disabled, not supported for the basic tier. | `string` | `"Disabled"` | no |
 | location | Specifies the supported Azure location where the resource exists. | `string` | `"eastus"` | no |
-| mariadb\_configurations | Map of MariaDB configuration settings to create. Key is name, value is vnet id | `map` | `{}` | no |
+| mariadb\_configurations | Map of MariaDB configuration settings to create. Key is name, value is value. See mariadb.com/kb/en/server-system-variables/ | `map` | `{}` | no |
+| monitor\_action\_group\_id | ID of Azure Monitor Action Group for metric to trigger | `string` | `""` | no |
+| monitor\_metric\_alert\_criteria | Map of name = criteria objects | <pre>map(object({<br>    # criteria.*.aggregation to be one of [Average Count Minimum Maximum Total]<br>    aggregation = string<br>    metric_name = string<br>    # criteria.0.operator to be one of [Equals NotEquals GreaterThan GreaterThanOrEqual LessThan LessThanOrEqual]<br>    operator  = string<br>    threshold = number<br><br>    dimension = map(object({<br>      name     = string<br>      operator = string<br>      values   = list(string)<br>    }))<br>  }))</pre> | `{}` | no |
 | name | The name of the resource group in which to create the MariaDB Server. | `string` | `""` | no |
 | server\_version | Specifies the version of MariaDB to use. | `string` | `"10.3"` | no |
 | sku\_name | Specifies the SKU Name for this MariaDB Server. | `string` | `"B_Gen5_2"` | no |
@@ -40,6 +76,7 @@ Batteries-included MariaDB on Azure
 |------|-------------|
 | administrator\_login | Administrative user name of MariaDB server |
 | administrator\_password | Password for administrative user name of MariaDB server |
+| monitor\_metric\_alerts | List Azure Monitor Metric Alert resources for the MariaDB Server |
 | resource\_group\_name | Name of MariaDB server resource group |
 | server\_fqdn | FQDN of MariaDB server |
 | server\_id | ID of MariaDB server |

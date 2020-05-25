@@ -14,13 +14,6 @@ resource "random_password" "db_password" {
   override_special = "_%@"
 }
 
-locals {
-  administrator_password   = var.administrator_password == "" ? random_password.db_password[0].result : var.administrator_password
-  name                     = var.name == "" ? random_pet.name.id : var.name
-  administrator_login_long = var.administrator_login == "" ? random_pet.name.id : var.administrator_login
-  administrator_login      = substr(local.administrator_login_long, 0, 16)
-}
-
 module "tags" {
   source  = "rhythmictech/tags/terraform"
   version = "1.0.0"
@@ -38,7 +31,7 @@ module "tags" {
 resource "azurerm_resource_group" "mariadb_rg" {
   name     = "${local.name}-RG"
   location = var.location
-  tags     = module.tags.tags
+  tags     = local.tags
 }
 
 resource "azurerm_mariadb_server" "mariadb_server" {
@@ -50,7 +43,7 @@ resource "azurerm_mariadb_server" "mariadb_server" {
   administrator_login_password = local.administrator_password
   version                      = var.server_version
   ssl_enforcement              = var.ssl_enforcement
-  tags                         = module.tags.tags
+  tags                         = local.tags
 
   storage_profile {
     storage_mb            = var.storage_mb
@@ -96,4 +89,37 @@ resource "azurerm_mariadb_configuration" "config" {
   value               = each.value
   resource_group_name = azurerm_resource_group.mariadb_rg.name
   server_name         = azurerm_mariadb_server.mariadb_server.name
+}
+
+########################################
+# Monitoring
+########################################
+resource "azurerm_monitor_metric_alert" "mariadb" {
+  for_each            = var.monitor_metric_alert_criteria
+  name                = "${local.name}-${upper(each.key)}"
+  resource_group_name = azurerm_resource_group.mariadb_rg.name
+  scopes              = [azurerm_mariadb_server.mariadb_server.id]
+  tags                = local.tags
+
+  action {
+    action_group_id = var.monitor_action_group_id
+  }
+
+  # see https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported
+  criteria {
+    aggregation      = each.value.aggregation
+    metric_namespace = "Microsoft.DBforMariaDB/servers"
+    metric_name      = each.value.metric_name
+    operator         = each.value.operator
+    threshold        = each.value.threshold
+
+    dynamic "dimension" {
+      for_each = each.value.dimension
+      content {
+        name     = dimension.value.name
+        operator = dimension.value.operator
+        values   = dimension.value.value
+      }
+    }
+  }
 }
